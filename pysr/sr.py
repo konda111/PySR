@@ -346,6 +346,8 @@ class PySRRegressor(MultiOutputMixin, RegressorMixin, BaseEstimator):
         Default is `0.1`.
     annealing : bool
         Whether to use annealing.  Default is `False`.
+    norm_evol : bool
+        Whether to use alternative normed evolution probability.  Default is `False`.
     early_stop_condition : float | str
         Stop the search early if this loss is reached. You may also
         pass a string containing a Julia function which
@@ -679,6 +681,7 @@ class PySRRegressor(MultiOutputMixin, RegressorMixin, BaseEstimator):
         adaptive_parsimony_scaling=20.0,
         alpha=0.1,
         annealing=False,
+        norm_evol=False,
         early_stop_condition=None,
         ncyclesperiteration=550,
         fraction_replaced=0.000364,
@@ -771,6 +774,7 @@ class PySRRegressor(MultiOutputMixin, RegressorMixin, BaseEstimator):
         self.adaptive_parsimony_scaling = adaptive_parsimony_scaling
         self.alpha = alpha
         self.annealing = annealing
+        self.norm_evol = norm_evol
         # - Evolutionary search parameters
         # -- Mutation parameters
         self.weight_add_node = weight_add_node
@@ -1652,6 +1656,7 @@ class PySRRegressor(MultiOutputMixin, RegressorMixin, BaseEstimator):
             optimizer_iterations=self.optimizer_iterations,
             perturbation_factor=self.perturbation_factor,
             annealing=self.annealing,
+            norm_evol=self.norm_evol,
             timeout_in_seconds=self.timeout_in_seconds,
             crossover_probability=self.crossover_probability,
             skip_mutation_failures=self.skip_mutation_failures,
